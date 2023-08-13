@@ -8,5 +8,9 @@
         "IDF_CCACHE_ENABLE": "1",
         "ESP_ROM_ELF_DIR": "C:\\Users\\makr0\\.espressif\\tools\\esp-rom-elfs\\20230320/"
     },
-    "idf.gitPathWin": "C:\\Users\\makr0\\.espressif\\tools\\idf-git\\2.39.2\\cmd\\git.exe"
+    "idf.gitPathWin": "C:\\Users\\makr0\\.espressif\\tools\\idf-git\\2.39.2\\cmd\\git.exe",
+    "files.associations": {
+        "*.tcc": "cpp",
+        "cstdio": "cpp"
+    }
 }
