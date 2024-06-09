@@ -4,7 +4,7 @@
 #include "buttons.h"
 #include "display.h"
 
-extern QueueHandle_t serialDataQueue;
+extern QueueHandle_t serialDataForButtonboxQueue;
 extern QueueHandle_t screenDataQueue;
 extern QueueHandle_t encoderInputQueue;
 
@@ -12,7 +12,7 @@ ESP32Encoder knobOne;
 
 void setupButtons() {
     ESP32Encoder::useInternalWeakPullResistors=UP;
-	knobOne.attachHalfQuad(ENCODER_PIN1, ENCODER_PIN2);
+	knobOne.attachHalfQuad(ENCODER_PIN2, ENCODER_PIN1);
 	knobOne.clearCount();
     xTaskCreatePinnedToCore(
         readButtonsTask, /* Function to implement the task */
@@ -38,7 +38,7 @@ void readButtonsTask( void * parameter) {
         messageToSerial.direction = encoderPosition > lastEncoderPosition ? 1:2;
         encoderMessage.encoderPosition = encoderPosition;
         encoderMessage.direction = messageToSerial.direction;
-        xQueueSend(serialDataQueue, (void*)&messageToSerial, 0);
+        xQueueSend(serialDataForButtonboxQueue, (void*)&messageToSerial, 0);
         xQueueSend(encoderInputQueue, (void*)&encoderMessage, 0);
         lastEncoderPosition = encoderPosition;
     }
